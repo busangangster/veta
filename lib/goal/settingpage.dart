@@ -1,50 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:veta/goal/prioritypage.dart';
+import 'package:veta/goal/py1.dart';
 import '../login/register.dart';
+import '../navigationbar.dart';
 import 'leadtimepage.dart';
 import 'categorypage.dart';
+import 'package:time_pickerr/time_pickerr.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
+import 'package:time_picker_sheet/widget/sheet.dart';
+import 'package:time_picker_sheet/widget/time_picker.dart';
 
 class Settingpage extends StatelessWidget {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
   var title = "??";
   int time = 0;
   int priority = 0;
   var category = "??";
+  var title1 = "??";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(actions: [
-          ElevatedButton(
-              onPressed: () async {
-                DocumentSnapshot data =
-                    await firestore.collection('ToDo').doc('ToDoo2').get();
-                time = data['time'];
-                category = data['category'];
-                priority = data['priority'];
-                Navigator.pop(context);
-                firestore.collection('ToDo').doc().set({
-                  "Title": title,
-                  "time": time,
-                  "priority": priority,
-                  "category": category
-                });
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegisterPage()),
-                );
-              },
-              child: Text('Save'),
-              style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color(0xffb003399),
-                  elevation: 1,
-                  shape: BeveledRectangleBorder(),
-                  padding: EdgeInsets.all(19.0),
-                  minimumSize: Size(0, 0))),
-        ]),
+        appBar: AppBar(
+            foregroundColor: const Color(0xffb936DFF),
+            backgroundColor: Colors.white,
+            actions: [
+              ElevatedButton(
+                  onPressed: () async {
+                    DocumentSnapshot data =
+                        await firestore.collection('ToDo').doc('ToDoo2').get();
+                    title1 = data['Title'];
+                    priority = data['priority'];
+                    time = data['time'];
+                    category = data['category'];
+                    firestore.collection(user!.uid).doc().set({
+                      "Title": '$title1',
+                      "priority": priority,
+                      "category": category,
+                      "time": time,
+                      "Completion": false
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NavigationPage()),
+                    );
+                  },
+                  child: Text('Save'),
+                  style: TextButton.styleFrom(
+                    primary: const Color(0xffb936DFF),
+                    backgroundColor: Colors.white,
+                    elevation: 1, shape: BeveledRectangleBorder(),
+                    padding: EdgeInsets.all(0.0),
+                    // minimumSize: Size(0,0)
+                  )),
+            ]),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -55,6 +68,10 @@ class Settingpage extends StatelessWidget {
                 decoration: InputDecoration(hintText: 'Title'),
                 onChanged: (value) {
                   title = value;
+                  firestore
+                      .collection('ToDo')
+                      .doc('ToDoo2')
+                      .update({"Title": title});
                 },
               ),
               padding: EdgeInsets.only(left: 20),
@@ -70,7 +87,7 @@ class Settingpage extends StatelessWidget {
                     Expanded(
                         flex: 1,
                         child: Container(
-                            child: Image.asset('assets/alaem2.png'), width: 5)),
+                            child: Image.asset('assets/time.png'), width: 5)),
                     Expanded(
                         flex: 4,
                         child: ElevatedButton(
@@ -96,7 +113,7 @@ class Settingpage extends StatelessWidget {
                     Expanded(
                         flex: 1,
                         child: Container(
-                            child: Image.asset('assets/work.png'), width: 5)),
+                            child: Image.asset('assets/pri.png'), width: 5)),
                     Expanded(
                         flex: 4,
                         child: ElevatedButton(
@@ -122,8 +139,7 @@ class Settingpage extends StatelessWidget {
                     Expanded(
                         flex: 1,
                         child: Container(
-                            child: Image.asset('assets/category.png'),
-                            width: 5)),
+                            child: Image.asset('assets/cate.png'), width: 5)),
                     Expanded(
                         flex: 4,
                         child: ElevatedButton(
@@ -144,4 +160,36 @@ class Settingpage extends StatelessWidget {
           ],
         ));
   }
+}
+
+buildCustomTimer(BuildContext context) {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  return CustomHourPicker(
+    elevation: 2,
+    onPositivePressed: (context, time) {
+      firestore.collection('ToDo').doc('ToDoo2').update({"time": time});
+      Navigator.pop(context);
+    },
+    onNegativePressed: (context) {
+      Navigator.pop(context);
+    },
+  );
+}
+
+Widget hourMinute24H() {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  var _dateTime = 0;
+  return Container(
+    color: Colors.white,
+    padding: EdgeInsets.only(top: 100),
+    child: new Column(
+      children: <Widget>[
+        new TimePickerSpinner(
+            is24HourMode: true,
+            onTimeChange: (time) {
+              _dateTime = time as int;
+            })
+      ],
+    ),
+  );
 }

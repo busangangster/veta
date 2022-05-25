@@ -21,31 +21,27 @@ class _CounterState extends State<Counter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title : Text("Halsuitta")
-      ),
+      appBar: AppBar(title: Text("Halsuitta")),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('ToDo').snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting){
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
           final docs = snapshot.data!.docs;
           return ListView.builder(
-              itemCount: docs.length ,
+              itemCount: docs.length,
               itemBuilder: (context, index) {
                 return Container(
                   color: colors[docs[index]['priority']],
                   padding: EdgeInsets.all(8),
                   child: Text(docs[index]['Title']),
                 );
-              }
-          );
+              });
         },
-
       ),
     );
   }

@@ -33,21 +33,73 @@ class SocialLogin extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Image.asset('assets/images/logo.png', width: 100, height: 80),
+          children: <Widget>[
+            Image.asset('assets/logo_2.png', width: 200, height: 200),
             //구글 로그인
-            TextButton(
-                onPressed: () {
-                  signInWithGoogle();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => nameinput()));
-                },
-                // onPressed: signInWithGoogle,
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.grey.withOpacity(0.3),
-                ),
-                child: const Text('구글로 로그인하기')),
+            SizedBox(
+              height: 100,
+            ),
+            SizedBox(
+              height: 50,
+              width: 300,
+              child: OutlinedButton(
+                  onPressed: () {
+                    signInWithGoogle();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => nameinput()));
+                  },
+                  // onPressed: signInWithGoogle,
+
+                  style: TextButton.styleFrom(
+                    side: BorderSide(color: Color(0xff222222)),
+                    primary: Colors.white,
+                    backgroundColor: Colors.white.withOpacity(0.3),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                  child: const Text('구글로 시작하기',
+                      style: TextStyle(
+                          color: Color(0xff222222),
+                          fontSize: 15,
+                          fontFamily: 'NotoSansKR'))),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+
+            SizedBox(
+              height: 30,
+            ),
+
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterPage()));
+                      },
+                      child: Text('이메일로 회원가입')),
+                  Container(
+                    height: 50,
+                    child: VerticalDivider(
+                        color: Colors.grey[300], thickness: 1.0),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                      },
+                      child: Text('이메일로 로그인')),
+                ],
+              ),
+            ),
+
             //카카오 로그인
             // TextButton(
             //     onPressed: () {
@@ -62,31 +114,6 @@ class SocialLogin extends StatelessWidget {
             //     child: Text('카카오로 로그인하기'),
             // ),
             //이메일 로그인
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
-              },
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.indigo,
-              ),
-              child: const Text('이메일로 로그인하기'),
-            ),
-            //이메일 회원가입
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RegisterPage()));
-              },
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.indigo,
-              ),
-              child: const Text('이메일로 회원가입하기'),
-            ),
           ],
         ),
       ),

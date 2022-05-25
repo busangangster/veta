@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +15,62 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartState extends State<ChartPage> {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
+  var study = 0;
+  var exercise = 0;
+  var reading = 0;
+  var relations = 0;
+  var hobby = 0;
+  var job = 0;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  bool Completion = false;
+
+  Future<void> getData() async {
+    User? user = _firebaseAuth.currentUser;
+
+    study = 0;
+    exercise = 0;
+    reading = 0;
+    relations = 0;
+    hobby = 0;
+    job = 0;
+
+    FirebaseFirestore.instance
+        .collection(user!.uid)
+        .get()
+        .then((QuerySnapshot ds) {
+      for (var doc in ds.docs) {
+        if (doc['category'] == "Study") {
+          study = doc['time'] + study;
+        } else if (doc['category'] == "Exercise") {
+          exercise = doc['time'] + exercise;
+        } else if (doc['category'] == "Reading") {
+          reading = doc['time'] + reading;
+        } else if (doc['category'] == "Relations") {
+          relations = doc['time'] + relations;
+        } else if (doc['category'] == "Hobby") {
+          hobby = doc['time'] + hobby;
+        } else if (doc['category'] == "Job prepare") {
+          job = doc['time'] + job;
+        }
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   final dataMap = <String, double>{
     "Study": 40,
     "Exercise": 30,
-    "People": 15,
-    "Free-time": 15,
+    "Reading": 15,
+    "Relations": 15,
+    "Hobby": 15,
+    "Job prepare": 15,
   };
 
   final legendLabels = <String, String>{
@@ -33,6 +86,7 @@ class _ChartState extends State<ChartPage> {
     Color(0xfffd79a8),
     Color(0xffe17055),
     Color(0xff6c5ce7),
+    Color(0xffec5e87),
   ];
 
   final gradientList = <List<Color>>[
@@ -432,6 +486,110 @@ class _ChartState extends State<ChartPage> {
                     margin: EdgeInsets.symmetric(
                       vertical: 32,
                     ),
+                  ),
+
+                  StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection(user!.uid)
+                        .orderBy("priority")
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      final docs = snapshot.data!.docs;
+
+                      final List<Color> colors = [
+                        Color(0xffbFF6D6D),
+                        Color(0xffbFFB36D),
+                        Color(0xffbFFE86D),
+                        Color(0xffb9CFF6D),
+                        Color(0xffb6DA8FF)
+                      ];
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: docs.length,
+                          itemBuilder: (context, index) {
+                            final item = docs[index];
+
+                            bool Completion = false;
+                            return Container(
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    // Text(
+                                    //   "sum hobby = $hobby",
+                                    //   style: TextStyle(fontSize: 10),
+                                    // ),
+                                    // Text("exercise = $exercise"),
+                                    (Completion = docs[index]['Completion']) ==
+                                            true
+                                        ? Container(
+                                            child: Column(
+                                            children: [
+                                              // Container(
+                                              //   child: (() {
+                                              //     if (docs[index]['category']
+                                              //         .toString() ==
+                                              //         "Study") {
+                                              //       study = docs[index]
+                                              //       ['time'] +
+                                              //           study;
+                                              //     } else if (docs[index]
+                                              //     ['category'] ==
+                                              //         "Exercise") {
+                                              //       exercise = docs[index]
+                                              //       ['time'] +
+                                              //           exercise;
+                                              //     } else if (docs[index]
+                                              //     ['category']
+                                              //         .toString() ==
+                                              //         "Reading") {
+                                              //       reading = docs[index]
+                                              //       ['time'] +
+                                              //           reading;
+                                              //     } else if (docs[index]
+                                              //     ['category']
+                                              //         .toString() ==
+                                              //         "Relations") {
+                                              //       relations = docs[index]
+                                              //       ['time'] +
+                                              //           relations;
+                                              //     } else if (docs[index]
+                                              //     ['category']
+                                              //         .toString() ==
+                                              //         "Hobby") {
+                                              //       hobby = docs[index]
+                                              //       ['time'] +
+                                              //           hobby;
+                                              //     } else if (docs[index]
+                                              //     ['category']
+                                              //         .toString() ==
+                                              //         "Job prepare") {
+                                              //       job = docs[index]['time'] +
+                                              //           job;
+                                              //     }
+                                              //   })(),
+                                              // ),
+                                              // Text(docs[index]['category'],
+                                              //     style:
+                                              //         TextStyle(fontSize: 10)),
+                                              // Text(
+                                              //     docs[index]['time']
+                                              //         .toString(),
+                                              //     style:
+                                              //         TextStyle(fontSize: 10))
+                                            ],
+                                          ))
+                                        : Container()
+                                  ],
+                                ));
+                          });
+                    },
                   ),
 
                   //  settings,

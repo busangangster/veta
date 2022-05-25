@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:veta/login/register.dart';
+import 'package:veta/navigationbar.dart';
+
+import '../goal/py1.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,45 +15,67 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ListView(
-          children: <Widget>[
-            const Text(
-              '로그인',
-              style: TextStyle(fontSize: 41, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 120.0),
-            const TextField(
-              decoration: InputDecoration(
-                filled: true,
-                labelText: '이메일',
-                hintText: '이메일을 입력해주세요',
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context); //뒤로가기
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+        backgroundColor: Color(0xff936DFF),
+      ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(40.0, 60.0, 40.0, 0.0),
+        child: Center(
+          child: ListView(
+            children: <Widget>[
+              const Text(
+                '로그인',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff222222)),
               ),
-            ),
-            const SizedBox(height: 12.0),
-            const TextField(
-              decoration: InputDecoration(
-                filled: true,
-                labelText: '비밀번호',
-                hintText: '비밀번호를 입력해주세요',
+              const SizedBox(height: 120.0),
+              const TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  labelText: '이메일',
+                  hintText: '이메일을 입력해주세요',
+                ),
               ),
-            ),
-            RaisedButton(
-              child: const Text("확인"),
-              textColor: Colors.white,
-              color: Colors.indigo,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const RegisterPage()),
-                );
-              },
-            ),
-            // TextButton(
-            //   child: Text('아이디 찾기'),
-            //   onPressed: (),
-            // ),
-          ],
+              const SizedBox(height: 12.0),
+              const TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  labelText: '비밀번호',
+                  hintText: '비밀번호를 입력해주세요',
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              RaisedButton(
+                child: const Text("확인"),
+                textColor: Colors.white,
+                color: Color(0xff936DFF),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => (NavigationPage())),
+                  );
+                },
+              ),
+              // TextButton(
+              //   child: Text('아이디 찾기'),
+              //   onPressed: (),
+              // ),
+            ],
+          ),
         ),
       ),
     );

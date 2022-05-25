@@ -19,7 +19,7 @@ class _NavigationState extends State<NavigationPage> {
     nameinput(),
     schedulePage(),
     ChartPage(),
-    MyPage(),
+    Timetable(),
   ];
   void onTap(int index) {
     setState(() {
@@ -37,9 +37,6 @@ class _NavigationState extends State<NavigationPage> {
       ),
       home: Scaffold(
         body: _children[_currentIndex],
-        appBar: AppBar(
-          title: Text('Motive'),
-        ),
         bottomNavigationBar: SalomonBottomBar(
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),

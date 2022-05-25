@@ -2,7 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 
-
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Firebase.initializeApp();
@@ -69,7 +68,7 @@ class _HomeState extends State<Home> {
         shrinkWrap: true,
         itemBuilder: (context, snapshot, animation, index) {
           var v =
-          snapshot.value.toString(); // {subtitle: webfun, title: subscribe}
+              snapshot.value.toString(); // {subtitle: webfun, title: subscribe}
 
           g = v.replaceAll(
               RegExp("{|}|subtitle: |title: "), ""); // webfun, subscribe

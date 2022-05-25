@@ -31,7 +31,7 @@ class _LandingPageState extends State<LandingPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Image.asset(
-              'assets/whynot.png',
+              'assets/motive.png',
               fit: BoxFit.cover,
             )),
       ],

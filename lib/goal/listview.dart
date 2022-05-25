@@ -12,17 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title : "Stream Builder",
-      theme: ThemeData(
-          primaryColor: Colors.blue
-      ),
-      home : Counter(),
+      title: "Stream Builder",
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: Counter(),
     );
   }
 }
-
-
-
 
 /*
 import 'package:flutter/material.dart';

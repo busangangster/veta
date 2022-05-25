@@ -43,6 +43,13 @@ dependencies:
   flutter_native_splash: ^2.1.6
   introduction_screen: ^3.0.2
   salomon_bottom_bar: ^3.3.1
+  time_pickerr: ^1.0.6
+  flutter_time_picker_spinner: ^2.0.0
+  time_picker_sheet: ^0.0.2+1
+  flutter_swipe_action_cell: ^3.0.1
+  flutter_slidable: ^1.2.1
+  flutter_timetable_view: ^0.2.0
+
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +83,12 @@ flutter:
     - assets/dis_3.png
     - assets/dis_4.png
     - assets/whynot.png
+    - assets/cate.png
+    - assets/pri.png
+    - assets/time.png
+    - assets/logo.png
+    - assets/prio.png
+    - assets/logo_2.png
 
 
   # To add assets to your application, add an assets section, like this:
