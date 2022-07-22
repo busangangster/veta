@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:veta/login/register.dart';
 import 'package:veta/navigationbar.dart';
 
-import '../goal/py1.dart';
+import 'package:veta/Goal&MainPage/mainPage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: const Color(0xffb936DFF),
+        backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context); //뒤로가기
@@ -24,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
               Icons.arrow_back,
               color: Colors.white,
             )),
-        backgroundColor: Color(0xff936DFF),
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(40.0, 60.0, 40.0, 0.0),
@@ -36,23 +37,53 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xff222222)),
+                    color: Color(0xff5A5A5A)),
               ),
-              const SizedBox(height: 120.0),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 8),
+                height: 20.0,
+                child: const Text(
+                  '이메일',
+                  style: TextStyle(color: const Color(0xffb5A5A5A)),
+                ),
+              ),
+              const SizedBox(
+                height: 6.0,
+              ),
               const TextField(
                 decoration: InputDecoration(
-                  filled: true,
-                  labelText: '이메일',
-                  hintText: '이메일을 입력해주세요',
-                ),
+                    border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: const Color(0xffbD5D5D5)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: const Color(0xffb936DFF)),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: '이메일을 입력해주세요',
+                    labelStyle: TextStyle(color: const Color(0xffD5D5D5))),
               ),
               const SizedBox(height: 12.0),
               const TextField(
+                obscureText: true,
                 decoration: InputDecoration(
-                  filled: true,
-                  labelText: '비밀번호',
-                  hintText: '비밀번호를 입력해주세요',
-                ),
+                    border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: const Color(0xffbD5D5D5)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1, color: const Color(0xffb936DFF)),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: '비밀번호를 입력해주세요',
+                    labelStyle: TextStyle(color: const Color(0xffD5D5D5))),
               ),
               SizedBox(
                 height: 30,
@@ -81,64 +112,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-// class LoginPage extends StatefulWidget {
-//   @override
-//   State<LoginPage> createState() => _LoginPageState();
-// }
-
-// class _LoginPageState extends State<LoginPage> {
-//   final formKey = new GlobalKey<Formstate>();
-
-//   String _email;
-//   String _password;
-
-//   void validateAndSave() {
-//     final form = formKey.currentState;
-//     if (form.validate()) {
-//       form.save();
-//       print("Form is valid Email: $_email, password: $_password");
-//     } else {
-//       print('Form is invalid Email: $_email, password: $_password');
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Scaffold(
-//       appBar: new AppBar(
-//         title: new Text('login demo'),
-//       ),
-//       body: new Container(
-//         padding: EdgeInsets.all(16),
-//         child: new Form(
-//             key: formKey,
-//             child: new Column(
-//               crossAxisAlignment: CrossAxisAlignment.stretch,
-//               children: <Widget>[
-//                 new TextFormField(
-//                   decoration: new InputDecoration(labelText: 'Email'),
-//                   validator: (value) =>
-//                       value.isEmpty ? 'Email cannot be empty' : null,
-//                   onSaved: (value) => _email = value,
-//                 ),
-//                 new TextFormField(
-//                   obscureText: true,
-//                   decoration: new InputDecoration(labelText: 'Passwoed'),
-//                   validator: (value) =>
-//                       value.isEmpty ? 'Password cannot be empty' : null,
-//                   onSaved: (value) => _password = value,
-//                 ),
-//                 new RaisedButton(
-//                   child: new Text(
-//                     'Login',
-//                     style: new TextStyle(fontSize: 20.0),
-//                   ),
-//                   onPressed: validateAndSave,
-//                 )
-//               ],
-//             )),
-//       ),
-//     );
-//   }
-// }

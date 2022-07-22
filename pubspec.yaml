@@ -49,6 +49,13 @@ dependencies:
   flutter_swipe_action_cell: ^3.0.1
   flutter_slidable: ^1.2.1
   flutter_timetable_view: ^0.2.0
+  charts_flutter: ^0.12.0
+  email_validator: ^1.0.6
+  provider: ^6.0.3
+  intl: ^0.17.0
+  tutorial_coach_mark: ^1.2.3
+  flutter_screenutil: ^5.5.3+2
+  get: ^4.6.5
 
 
 dev_dependencies:
@@ -89,6 +96,14 @@ flutter:
     - assets/logo.png
     - assets/prio.png
     - assets/logo_2.png
+    - assets/quote.jpg
+    - assets/profile.jpeg
+    - assets/sp1.png
+    - assets/sp2.png
+    - assets/sp3.png
+    - assets/sp4.png
+    - assets/whynot112.png
+    - assets/whynot113.png
 
 
   # To add assets to your application, add an assets section, like this:

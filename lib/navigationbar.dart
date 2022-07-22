@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'char1.dart';
 import 'schedule.dart';
 import 'Mypage.dart';
 import 'chart.dart';
-import 'goal/py1.dart';
+import 'package:veta/Goal&MainPage/mainPage.dart';
 
 class NavigationPage extends StatefulWidget {
   static final title = 'salomon_bottom_bar';
@@ -16,10 +17,10 @@ class _NavigationState extends State<NavigationPage> {
   var _currentIndex = 0;
 
   final List<Widget> _children = [
-    nameinput(),
-    schedulePage(),
-    ChartPage(),
+    MainPage(),
     Timetable(),
+    Chart1Page(),
+    my_page(),
   ];
   void onTap(int index) {
     setState(() {
@@ -37,38 +38,44 @@ class _NavigationState extends State<NavigationPage> {
       ),
       home: Scaffold(
         body: _children[_currentIndex],
-        bottomNavigationBar: SalomonBottomBar(
-          currentIndex: _currentIndex,
-          onTap: (i) => setState(() => _currentIndex = i),
-          items: [
-            /// Home
-            SalomonBottomBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Home"),
-              selectedColor: Colors.purple,
-            ),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+          child: SalomonBottomBar(
+            currentIndex: _currentIndex,
+            onTap: (i) => setState(() => _currentIndex = i),
+            items: [
+              /// Home
+              SalomonBottomBarItem(
+                icon: Icon(
+                  Icons.home,
+                  size: 24,
+                ),
+                title: Text("Home"),
+                selectedColor: Colors.purple,
+              ),
 
-            /// Likes
-            SalomonBottomBarItem(
-              icon: Icon(Icons.favorite_border),
-              title: Text("interest"),
-              selectedColor: Colors.pink,
-            ),
+              /// Likes
+              SalomonBottomBarItem(
+                icon: Icon(Icons.calendar_today, size: 24),
+                title: Text("TimeTable"),
+                selectedColor: Colors.pink,
+              ),
 
-            /// Search
-            SalomonBottomBarItem(
-              icon: Icon(Icons.add_chart),
-              title: Text("Statistics"),
-              selectedColor: Colors.orange,
-            ),
+              /// Search
+              SalomonBottomBarItem(
+                icon: Icon(Icons.leaderboard, size: 24),
+                title: Text("Statistics"),
+                selectedColor: Colors.orange,
+              ),
 
-            /// Profile
-            SalomonBottomBarItem(
-              icon: Icon(Icons.person),
-              title: Text("Profile"),
-              selectedColor: Colors.teal,
-            ),
-          ],
+              /// Profile
+              SalomonBottomBarItem(
+                icon: Icon(Icons.person, size: 24),
+                title: Text("Profile"),
+                selectedColor: Colors.teal,
+              ),
+            ],
+          ),
         ),
       ),
     );

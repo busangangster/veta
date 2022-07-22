@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:veta/root.dart';
 import 'description.dart';
 
 class LandingPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _LandingPageState extends State<LandingPage> {
     Timer(Duration(seconds: 3), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OnBoardingPage()),
+        MaterialPageRoute(builder: (context) => root()),
       );
     });
     // TODO: implement initState
@@ -31,7 +32,7 @@ class _LandingPageState extends State<LandingPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Image.asset(
-              'assets/motive.png',
+              'assets/whynot113.png',
               fit: BoxFit.cover,
             )),
       ],

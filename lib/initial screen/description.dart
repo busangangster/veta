@@ -12,22 +12,22 @@ class OnBoardingPage extends StatelessWidget {
         PageViewModel(
             title: '할 일 등록하기',
             body: '자신의 할 일을 등록할 수 있어요.',
-            image: Image.asset('assets/dis_1.png', width: 200, height: 200),
+            image: Image.asset('assets/sp1.png', width: 200, height: 200),
             decoration: getPageDecoration()),
         PageViewModel(
             title: '우선순위',
             body: '할 일을 우선순위에 맞게 체계화해요.',
-            image: Image.asset('assets/dis_2.png', width: 200, height: 200),
+            image: Image.asset('assets/sp3.png', width: 200, height: 200),
             decoration: getPageDecoration()),
         PageViewModel(
             title: '통계',
             body: '사용한 시간을 되돌아 볼 수 있어요',
-            image: Image.asset('assets/dis_3.png', width: 200, height: 200),
+            image: Image.asset('assets/sp4.png', width: 200, height: 200),
             decoration: getPageDecoration()),
         PageViewModel(
             title: '위젯',
             body: '바탕화면에 위젯을 설정할 수 있어요',
-            image: Image.asset('assets/dis_1.png', width: 200, height: 200),
+            image: Image.asset('assets/sp2.png', width: 200, height: 200),
             decoration: getPageDecoration()),
       ],
       done: Text('done',

@@ -3,7 +3,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import '../goal/py1.dart';
+import 'package:veta/Goal&MainPage/mainPage.dart';
+import 'package:veta/signin/sign_in.dart';
+import 'package:veta/signin/sign_up.dart';
 import 'login.dart';
 import 'register.dart';
 
@@ -46,7 +48,7 @@ class SocialLogin extends StatelessWidget {
                   onPressed: () {
                     signInWithGoogle();
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => nameinput()));
+                        MaterialPageRoute(builder: (context) => MainPage()));
                   },
                   // onPressed: signInWithGoogle,
 
@@ -80,7 +82,7 @@ class SocialLogin extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RegisterPage()));
+                                builder: (context) => const SignUp()));
                       },
                       child: Text('이메일로 회원가입')),
                   Container(
@@ -90,10 +92,8 @@ class SocialLogin extends StatelessWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => SignIn()));
                       },
                       child: Text('이메일로 로그인')),
                 ],

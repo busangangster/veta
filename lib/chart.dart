@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:veta/char1.dart';
 
 import 'pie_chart.dart';
 
@@ -480,7 +481,15 @@ class _ChartState extends State<ChartPage> {
                   SizedBox(
                     height: 80,
                   ),
-
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => (Chart1Page())),
+                  //       );
+                  //     },
+                  //     child: Text("Go to Chart1Page()")),
                   Container(
                     child: chart,
                     margin: EdgeInsets.symmetric(
@@ -621,18 +630,21 @@ class HomePage2 extends StatelessWidget {
         title: Text("Pie Chart 1"),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: PieChart(
-          dataMap: dataMap,
-          chartType: ChartType.ring,
-          baseChartColor: Colors.grey[50]!.withOpacity(0.15),
-          colorList: colorList,
-          chartValuesOptions: ChartValuesOptions(
-            showChartValuesInPercentage: true,
-          ),
-          totalValue: 20,
-        ),
-      ),
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              PieChart(
+                dataMap: dataMap,
+                chartType: ChartType.ring,
+                baseChartColor: Colors.grey[50]!.withOpacity(0.15),
+                colorList: colorList,
+                chartValuesOptions: ChartValuesOptions(
+                  showChartValuesInPercentage: true,
+                ),
+                totalValue: 20,
+              ),
+            ],
+          )),
     );
   }
 }
